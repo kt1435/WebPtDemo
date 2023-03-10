@@ -28,7 +28,7 @@ export default class Board extends Vue {
         })
     }
 
-    beforeDestroy () {
+    beforeDestroy() {
         this.subscription.unsubscribe();
     }
 }

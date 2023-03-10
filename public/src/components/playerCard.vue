@@ -21,10 +21,6 @@ export default class Counter extends Vue {
   eventbus = EventBus.getInstance();
   subscription;
 
-  attack() {
-    this.eventbus.attackSubject.next(this.player, this.player.attack, target);
-  }
-
   player = {
     platform: "computer",
     region: "us",
@@ -36,6 +32,26 @@ export default class Counter extends Vue {
       name: "Crazy Attack",
       damage: 15,
     }
+  }
+
+  attack() {
+    this.eventbus.attackSubject.next(this.player, this.player.attack, target);
+  }
+
+  handleAttacked(attacker, attack, target) {
+    if (target.id === this.player.id) {
+
+    }
+  }
+
+  mounted() {
+    this.subscription = this.eventbus.attackSubject.subscribe((attacker, attack, target) => {
+      this.handleAttacked(attacker, attack, target);
+    })
+  }
+
+  beforeDestroy() {
+    this.subscription.unsubscribe();
   }
 }
 </script>

@@ -1,11 +1,13 @@
 <template>
   <div>
-    <card>
-      <title>{{ player.id }}</title>
-      <title>{{ player.character }}</title>
-      <span>{{ currentHp }}/{{ maxHp }}</span>
-      <button onclick="attack()">Attack</button>
-    </card>
+    <v-card>
+      <v-card-title>{{ player.id }}</v-card-title>
+      <v-card-subtitle>{{ player.character }}</v-card-subtitle>
+      <v-card-text>{{ currentHp }}/{{ maxHp }}</v-card-text>
+      <v-card-actions>
+        <button onclick="attack()">Attack</button>
+      </v-card-actions>
+    </v-card>
   </div>
 </template>
 
@@ -20,7 +22,7 @@ export default class Counter extends Vue {
   subscription;
 
   attack() {
-    this.eventbus.attackSubject.next(attack, player, target);
+    this.eventbus.attackSubject.next(this.player, this.player.attack, target);
   }
 
   player = {
@@ -31,7 +33,8 @@ export default class Counter extends Vue {
     maxHp: number,
     currentHp: number,
     attack: {
-
+      name: "Crazy Attack",
+      damage: 15,
     }
   }
 }
